@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:Class-ification.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ios-charts-master/Charts/Charts.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Class-ification.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
