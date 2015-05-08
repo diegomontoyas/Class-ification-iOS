@@ -57,10 +57,12 @@ class ChallengeViewController: UIViewController
             
             self.view.backgroundColor = UIColor(red: 154/255.0, green: 104/255.0, blue: 139/255.0, alpha: 1)
             self.prizeLabel.alpha = 0
+            self.askToAnswerButton.alpha = 0
             
         }) { (finished) -> Void in
             
             self.prizeLabel.hidden = true
+            self.askToAnswerButton.hidden = true
             
             self.timer = CircularTimer(position: self.view.center, radius: 90, internalRadius: 0, circleStrokeColor: UIColor.grayColor(), activeCircleStrokeColor: UIColor.whiteColor(), initialDate: NSDate(), finalDate: NSDate().dateByAddingTimeInterval(5), startCallback: nil, endCallback: { () -> Void in
                 
@@ -85,7 +87,7 @@ class ChallengeViewController: UIViewController
     
     func show()
     {
-        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             
             self.view.frame = self.parentViewController!.view.frame
             

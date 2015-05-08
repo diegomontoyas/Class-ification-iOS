@@ -15,6 +15,8 @@ class QuestionViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var question: Question!
     
+    let abc = ["A","B","C","D","E"]
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -34,7 +36,7 @@ class QuestionViewController: UIViewController, UITableViewDataSource, UITableVi
     {
         let cell = answersTableView.dequeueReusableCellWithIdentifier("MultipleChoiceAnswerTableViewCell") as! MultipleChoiceAnswerTableViewCell
         
-        cell.letterLabel.text = "A"
+        cell.letterLabel.text = abc[indexPath.row]
         cell.answerLabel.text = question.answers[indexPath.row]
         
         return cell

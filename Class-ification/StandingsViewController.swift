@@ -26,6 +26,8 @@ class StandingsViewController: UIViewController, GKBarGraphDataSource
     {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "update:", name:"PointsChanged", object: nil)
+        
         barChart.dataSource = self
         barChart.marginBar = barSpacing
         barChart.backgroundColor = UIColor.clearColor()
@@ -102,6 +104,12 @@ class StandingsViewController: UIViewController, GKBarGraphDataSource
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
+    }
+    
+    func update(notification:NSNotification)
+    {
+        myPointsLabel.text = system.myPoints.description
+        barChart.draw()
     }
 }
 

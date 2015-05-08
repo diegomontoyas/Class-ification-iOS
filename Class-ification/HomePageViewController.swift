@@ -18,6 +18,8 @@ class HomePageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         dataSource = self
         
+        automaticallyAdjustsScrollViewInsets = false
+        
         let standingsViewController = storyboard?.instantiateViewControllerWithIdentifier("StandingsViewController") as! StandingsViewController
         standingsViewController.pageIndex = 0
         standingsViewController.view.frame = view.bounds
@@ -27,9 +29,16 @@ class HomePageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         instantiatedViewControllers = [standingsViewController, prizesViewController]
         
-        setViewControllers([standingsViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+        setViewControllers([standingsViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
    
         UIPageControl.appearance().backgroundColor = UIColor.clearColor()
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        
     }
         
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?

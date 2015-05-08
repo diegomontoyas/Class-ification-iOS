@@ -15,8 +15,23 @@ class System: NSObject, GCDAsyncSocketDelegate
     var socket: GCDAsyncSocket!
     
     var myPoints = 304
-    var classPoints = [40,30,130,123,132,304,120,450,49,70,150]
-    var prizes = [Prize(cost: 150, priceDescription: "+0.5 Quiz"), Prize(cost: 180, priceDescription: "Reto +300"), Prize(cost: 400, priceDescription: "+0.2 parcial")]
+    var classPointsWithoutMe = [40,30,130,123,132,120,450,49,70,150]
+    
+    var classPoints:[Int]!
+    {
+        get
+        {
+            var classPoints = classPointsWithoutMe
+            classPoints.append(myPoints)
+            classPoints.sort
+            {
+                    return $0 < $1
+            }
+            return classPoints
+        }
+    }
+    
+    var prizes = [Prize(cost: 150, priceDescription: "+0.5 Quiz"), Prize(cost: 180, priceDescription: "Reto +300"), Prize(cost: 800, priceDescription: "+0.2 parcial")]
     
     var currentChallenge: Challenge?
 
@@ -31,11 +46,6 @@ class System: NSObject, GCDAsyncSocketDelegate
         
         socket.readDataToData("\n".dataUsingEncoding(NSUTF8StringEncoding), withTimeout: -1, tag: 0)
         
-        classPoints.sort
-        {
-            return $0 < $1
-        }
-        
         prizes.sort
         {
             return $0.cost < $1.cost
@@ -49,7 +59,11 @@ class System: NSObject, GCDAsyncSocketDelegate
     
     func presentPointsWon(points:Int)
     {
+        myPoints += points
+        
         (UIApplication.sharedApplication().delegate! as! AppDelegate).presentPointsWon(points)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("PointsChanged", object: nil)
     }
     
     func presentQuestion(question:Question)
